@@ -15,5 +15,5 @@ jobs:
           node-version: 18.x
           cache: "pnpm"
           
-      - run: npm ci
+      - run: pnpm run ci
 
