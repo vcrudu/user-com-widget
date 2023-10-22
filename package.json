@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "build": "tsup src/index.ts --format cjs --dts --minify --clean",
-    "dev": "concurrently \"live-server --port=8080 --entry-file=index.html\" \"tsup src/index.ts --format cjs --dts --watch --clean\"",
+    "build": "tsup src/index.ts --loader \".html=text\" --loader \".css=text\"   --format cjs --dts --minify --clean",
+    "dev": "concurrently \"live-server --port=8080 --entry-file=index.html\" \"tsup src/index.ts --loader \".html=text\" --loader \".css=text\" --format cjs --dts --watch --clean\"",
     "lint": "tsc",
     "ci": "npm run lint && npm run test && npm run build"
   },

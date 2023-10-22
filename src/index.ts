@@ -1,4 +1,11 @@
+import type { TMessage } from "./types";
+import userComWidgetTemplate from "./template.html";
+import style from "./style.css";
+
 class UserComWidget extends HTMLElement {
+  private messages: TMessage[] = [];
+  private messageInput: HTMLTextAreaElement| undefined;
+
   constructor() {
     super();
 
@@ -6,9 +13,9 @@ class UserComWidget extends HTMLElement {
     const shadowRoot = this.attachShadow({ mode: "open" });
 
     // Get the template content
-    const template = document.getElementById(
-      "user-com-widget-template"
-    ) as HTMLTemplateElement;
+    const template = document.createElement("template");
+    template.innerHTML = `${userComWidgetTemplate}<style>${style}</style>`;
+
     const templateContent = template.content.cloneNode(true);
 
     // Append the template content to the shadow root
@@ -30,25 +37,44 @@ class UserComWidget extends HTMLElement {
     const openWidget = this.shadowRoot.getElementById("open-widget");
     const closeButton = this.shadowRoot.getElementById("close-button");
     const sendButton = this.shadowRoot.getElementById("send-button");
-    const messagesInput = this.shadowRoot.getElementById("message-input");
+    this.messageInput = this.shadowRoot.getElementById("message-input") as HTMLTextAreaElement;
 
     if (
       !closedWidget ||
       !openWidget ||
       !closeButton ||
       !sendButton ||
-      !messagesInput
+      !this.messageInput
     ) {
       throw new Error(
         "Shadow root must be created before initializing the widget"
       );
     }
 
-    messagesInput.addEventListener("input", function () {
+    this.messageInput.addEventListener("input", function () {
       // Reset the height to 'auto' to get the scroll height correctly
       this.style.height = "auto";
       // Set the height to the scroll height (content height)
       this.style.height = this.scrollHeight + "px";
+    });
+
+    sendButton.addEventListener("click", () => {
+      if (!this.messageInput) {
+        throw new Error("Messages input is not defined");
+      } 
+
+      const message = this.messageInput.value;
+      console.log(message);
+      if (message) {
+        const messageItem = {
+          id: this.messages.length + 1,
+          author: "You",
+          text: message,
+          timestamp: Date.now(),
+        };
+        this.messages.push(messageItem);
+        this.addMessageToUi(messageItem);
+      }
     });
 
     // Event listeners and other initialization logic go here
@@ -67,6 +93,20 @@ class UserComWidget extends HTMLElement {
         openWidget.style.display = "none";
       }, 150);
     });
+  }
+  
+  addMessageToUi(messageItem: TMessage) {
+    const messageList = this.shadowRoot!.querySelector("ul.message-list");
+    const messageTemplate = this.shadowRoot!.querySelector("li.message.user-message.display-none");
+    
+    if (messageList && messageTemplate && this.messageInput) {
+      const newMessage = messageTemplate.cloneNode(true) as HTMLElement;
+      newMessage.querySelector(".message-body p")!.textContent = messageItem.text;
+      newMessage.querySelector(".message-body .tooltip")!.textContent = `${messageItem.author} at ${new Date(messageItem.timestamp).toLocaleString()}`;
+      newMessage.classList.remove("display-none");
+      messageList.appendChild(newMessage);
+      this.messageInput.value = ""; // Clear the message input
+    }
   }
 
   connectedCallback() {

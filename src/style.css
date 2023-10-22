@@ -1,0 +1,188 @@
+* {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    background: none;
+    outline: none;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#widget-container {
+    position: fixed;
+    bottom: 5%;
+    right: 5%;
+    z-index: 1000;
+}
+
+/* Style for the open widget container */
+#open-widget {
+    display: flex;
+    flex-direction: column;
+    /* Stack children vertically */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 120px;
+    height: 160px;
+    transition: width 0.3s ease, height 0.3s ease;
+    /* Transition settings */
+    /* Adjust height as needed */
+    background-color: #f9f9f9;
+}
+
+#open-widget.open {
+    width: 350px;
+    height: 600px;
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+/* Style for the header */
+#open-widget #header {
+    display: flex;
+    justify-content: space-between;
+    /* Space out elements horizontally */
+    align-items: center;
+    /* Vertically center align items */
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border-bottom: 1px solid #ccc;
+    border-radius: 10px 10px 0 0;
+}
+
+
+#open-widget #header button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+}
+
+#open-widget #header button:hover {
+    color: #ccc;
+}
+
+/* Style for the messages container */
+
+
+/* Style for the message input and send button container */
+#open-widget #input-container {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+}
+
+/* Style for the message input */
+#open-widget #message-input {
+    flex: 1;
+    /* Take up remaining space */
+    padding: 5px;
+    border: none;
+    overflow: hidden;
+
+}
+
+/* Style for the send button */
+#open-widget #send-button {
+    margin-left: 10px;
+    color: #1468c3;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 30px;
+}
+
+#open-widget #send-button:active {
+    background-color: #ccc;
+}
+
+#open-widget #send-button:hover {
+    color: #0d055d;
+}
+
+#open-widget #messages-container {
+    flex: 1;
+    /* Take up remaining space */
+    overflow-y: auto;
+    /* Allow scrolling for overflow content */
+    padding: 10px;
+    font-size: small;
+}
+
+/* Style for the user message */
+.user-message {
+    background-color: #1468c3;
+    color: #fff;
+    align-self: flex-end;
+    margin-left: 100px;
+    margin-top: 5px;
+}
+
+/* Style for the response message */
+.response-message {
+    background-color: #3cb371;
+    color: #fff;
+    align-self: flex-start;
+    margin-right: 100px;
+    margin-top: 5px;
+}
+
+/* Adjust the colors and styles as needed */
+.message {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    border-radius: 5px 5px 0 0;
+}
+
+.message-sender {
+    margin-right: 10px;
+}
+
+.message-timestamp {
+    font-size: 14px;
+}
+
+.message-body {
+    padding: 5px;
+}
+
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.tooltip {
+    position: absolute;
+    background-color: #cec2c2;
+    color: hsl(0, 0%, 0%);
+    padding: 5px;
+    border-radius: 3px;
+    display: none;
+    z-index: 1;
+}
+
+.tooltip-container:hover .tooltip {
+    display: block;
+}
+
+.tooltip {
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.display-none {
+    display: none;
+}
+
+.all-space {
+    width: 100%;
+}

@@ -1,0 +1,49 @@
+<div id="widget-container">
+
+    <!-- Closed State -->
+    <div id="closed-widget" class="widget-closed">
+        <img src="images/android.png" width="45px" alt="Support Icon" id="support-icon" />
+    </div>
+
+    <!-- Open State -->
+    <div id="open-widget" class="widget-open">
+        <div id="header">
+            <span id="title">User Communication</span>
+            <button id="close-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-x">
+                    <path d="M18 6 6 18" />
+                    <path d="m6 6 12 12" />
+                </svg></button>
+        </div>
+
+        <div id="messages-container">
+            <!-- User Message in Blue -->
+            <ul class="message-list">
+                <li class="message user-message display-none">
+                    <div class="message-body all-space tooltip-container">
+                        <p>Hello, how can I help you today?</p>
+                        <div class="tooltip">You</div>
+                    </div>
+                </li>
+        
+                <!-- Response Message in Green -->
+                <li class="message response-message display-none">
+                    <div class="message-body all-space tooltip-container">
+                        <>Hi, I have a question about your services.</p>
+                        <div class="tooltip">Joe Doe</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div id="input-container">
+            <textarea id="message-input" placeholder="Type your message..."></textarea>
+            <button id="send-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-send-horizontal">
+                    <path d="m3 3 3 9-3 9 19-9Z" />
+                    <path d="M6 12h16" />
+                </svg></button>
+        </div>
+    </div>
+</div>
